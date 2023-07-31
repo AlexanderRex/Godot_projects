@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvcvns57vbiwa"]
+
+[ext_resource type="PackedScene" uid="uid://bk2pq74i2vxvg" path="res://ATOM_test/Characters/character_body_3d.tscn" id="1_nnqrk"]
+[ext_resource type="Script" path="res://ATOM_test/Maps/TestLevel.gd" id="1_u5bfd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dqvhx"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_l652k"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_u5bfd")
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, -0.000124692, 2.57978e-05, 0.000124692, 1, -0.000119365, -2.57978e-05, 0.000119365, 1, 0, -1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(73.513, 0, 0, 0, 2.17, 0, 0, 0, 60, 0, 0, 0)
+shape = SubResource("BoxShape3D_dqvhx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(73.513, 0, 0, 0, 2.17, 0, 0, 0, 60, 0, 0, 0)
+mesh = SubResource("BoxMesh_l652k")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.949688, 0, 0.313197, -0.165946, 0.848094, 0.503188, -0.265621, -0.529845, 0.805425, 16.796, 29.8648, 28.418)
+
+[node name="Player" parent="." instance=ExtResource("1_nnqrk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60341, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.807311, 0.590127, 0, -0.590127, 0.807311, 0, 4.71983, 6.09741)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Button1" type="Button" parent="CanvasLayer"]
+offset_left = 200.0
+offset_top = 100.0
+offset_right = 326.8
+offset_bottom = 188.0
+text = "Переход
+"
+
+[node name="Button2" type="Button" parent="CanvasLayer"]
+offset_left = 400.0
+offset_top = 100.0
+offset_right = 526.8
+offset_bottom = 188.0
+text = "Эффект"
+
+[node name="Button3" type="Button" parent="CanvasLayer"]
+offset_left = 629.0
+offset_top = 100.0
+offset_right = 755.8
+offset_bottom = 188.0
+text = "Обмен 
+местами"
+
+[node name="Button4" type="Button" parent="CanvasLayer"]
+offset_left = 829.0
+offset_top = 100.0
+offset_right = 955.8
+offset_bottom = 188.0
+text = "Выход
+"
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+
+[connection signal="pressed" from="CanvasLayer/Button1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button4" to="." method="_on_button_4_pressed"]

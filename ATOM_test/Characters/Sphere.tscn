@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://byl7k405w35cd"]
+
+[ext_resource type="Script" path="res://ATOM_test/Characters/move_circle.gd" id="1_86twy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_684wj"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_d5cqb"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_i1md0"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_86twy")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
+material_override = SubResource("StandardMaterial3D_684wj")
+mesh = SubResource("SphereMesh_d5cqb")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_i1md0")

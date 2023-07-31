@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://bhnltn07kudlu"]
+
+[ext_resource type="PackedScene" uid="uid://byl7k405w35cd" path="res://ATOM_test/Characters/Sphere.tscn" id="1_l5gq7"]
+[ext_resource type="Script" path="res://ATOM_test/Maps/empty.gd" id="1_tfh6x"]
+[ext_resource type="PackedScene" uid="uid://bk4a8nqh34wdu" path="res://ATOM_test/Particles/Fire.tscn" id="2_xoapn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yloif"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3oru4"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_py0mk"]
+
+[node name="EmptyScene" type="Node3D"]
+script = ExtResource("1_tfh6x")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.79262, 0.609716, 0, -0.609716, 0.79262, 0, 11.8689, 14.4743)
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, -0.000124692, 2.57978e-05, 0.000124692, 1, -0.000119365, -2.57978e-05, 0.000119365, 1, 0, -1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(73.513, 0, 0, 0, 2.17, 0, 0, 0, 60, 0, 0, 0)
+shape = SubResource("BoxShape3D_yloif")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(73.513, 0, 0, 0, 2.17, 0, 0, 0, 60, 0, 0, 0)
+mesh = SubResource("BoxMesh_3oru4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.949688, 0, 0.313197, -0.165946, 0.848094, 0.503188, -0.265621, -0.529845, 0.805425, 16.796, 29.8648, 28.418)
+
+[node name="Player" parent="." instance=ExtResource("1_l5gq7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.6, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("CylinderShape3D_py0mk")
+
+[node name="Fire" parent="." instance=ExtResource("2_xoapn")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BackButton" type="Button" parent="CanvasLayer"]
+offset_left = 942.0
+offset_top = 28.0
+offset_right = 1107.0
+offset_bottom = 80.0
+text = "Назад"
+
+[connection signal="pressed" from="CanvasLayer/BackButton" to="." method="_on_button_pressed"]
